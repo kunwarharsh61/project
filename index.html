@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Generative AI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+        }
+        
+        nav {
+            background: linear-gradient(135deg, #6e48aa 0%, #9d50bb 100%);
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            text-align: center;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-weight: 600;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 15px;
+            font-size: 18px;
+            display: inline-block;
+            transition: background-color 0.3s;
+            border-radius: 25px;
+        }
+
+        nav a:hover {
+            background-color: #ccacff;
+            color: rgb(0, 0, 0);
+            border-radius: 25px;
+        }
+
+        .top {
+            width: 95%;
+            height: 70vh;
+            min-height: 500px; 
+            max-height: 1024px; 
+            color: #6e48aa;
+            background-image: url(images/p5.jpeg);
+            background-size: cover; 
+            background-position: center center; 
+            background-repeat: no-repeat;
+            text-align: left;
+            padding: 40px;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-size: 50px;
+            margin: auto;
+            margin-top: 140px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .top h3 {
+            width: 80%;
+        }
+
+        
+        @media (max-width: 1200px) {
+            .top {
+                font-size: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top {
+                font-size: 32px;
+                padding: 20px;
+                height: 60vh;
+                margin-top: 100px;
+                background-position: 60% center;
+            }
+            
+            .top h3 {
+                width: 100%;
+            }
+            
+            nav a {
+                padding: 10px;
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .top {
+                font-size: 28px;
+                height: 50vh;
+                margin-top: 80px;
+            }
+            
+            nav {
+                padding: 10px;
+            }
+        }
+
+      
+        .pic {
+            width: 100%;
+            height: 100%;
+        }
+
+        .intro {
+            width: 95%;
+            margin: 50px auto;
+            padding: 40px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .intro h2 {
+            color: #6e48aa;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .intro p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        #second-card {
+            width: 95%;
+            height: 300px;
+            padding: 30px;
+            background: linear-gradient(135deg, #6e48aa 0%, #9d50bb 100%);
+            margin: 40px auto;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        #card h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        #card p {
+            font-size: 18px;
+            line-height: 1.8;
+            max-width: 80%;
+        }
+
+        footer {
+            width: 100%;
+            background-color: #222;
+            color: #fff;
+            text-align: center;
+            padding: 50px 20px;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: left;
+        }
+
+        .footer-column h3 {
+            color: #9c64ff;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .footer-column p, .footer-column a {
+            color: #ddd;
+            margin-bottom: 15px;
+            display: block;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: #9c64ff;
+        }
+
+        .icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .icons a {
+            color: white;
+            font-size: 24px;
+        }
+
+        .copyright {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            grid-column: 1 / -1;
+            text-align: center;
+        }
+
+        #home-box {
+            width: 95%;
+            height: 100px;
+            color: #6e48aa;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            border-radius: 30px;
+        }
+
+        #home-box h3 {
+            font-size: 40px;
+            margin-bottom: 20px;
+            margin-top: 50px;
+        }
+
+        #mainbox {
+            width: 95%;
+            margin: 40px auto;
+            display: flex;
+            overflow-x: auto;
+            padding: 20px 10px;
+            gap: 20px;
+            scrollbar-width: thin;
+            scrollbar-color: #6e48aa #f0f0f0;
+        }
+
+        .box {
+            min-width: 350px;
+            width: 350px;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border-top: 5px solid #6e48aa;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .box-image {
+            width: 100%;
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        .box h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #6e48aa;
+        }
+
+        .box p {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #555;
+        }
+
+        #mainbar {
+            width: 90%;
+            height: 100px;
+            display: flex;
+            flex-direction: row;
+            padding: 0px;
+            margin: auto;
+            font-size: 25px;
+        }
+
+        .bar {
+            width: 15%;
+            padding: 10px;
+            margin: auto;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-weight: 300;
+            background-color: #f8f9fa;
+            border: 1px solid black;
+            border-radius: 30px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .bar:hover {
+            background-color: #6e48aa;
+            color: white;
+        }
+
+        .bar a {
+            color: black;
+            text-decoration: none;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+
+        #last {
+            width: 95%;
+            height: 400px;
+            margin: auto;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        #last ol {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-size: 20px;
+        }
+
+        .info {
+            width: 95%;
+            margin: 50px auto;
+            background-color: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .info h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 30px;
+            color: #6e48aa;
+        }
+
+        .info-box {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .info-card {
+            padding: 25px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            border-left: 5px solid #6e48aa;
+        }
+
+        .info-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #6e48aa;
+        }
+
+        .info-card p {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #555;
+        }
+
+        .future-trends {
+            width: 95%;
+            margin: 80px auto;
+            padding: 50px;
+            background: linear-gradient(135deg, #6e48aa 0%, #9d50bb 100%);
+            border-radius: 15px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(110, 72, 170, 0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .future-trends h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .trends-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .trend-card {
+            flex: 1;
+            min-width: 250px;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+
+        .trend-card:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .trend-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .trend-card h3::before {
+            content: '→';
+            margin-right: 10px;
+            color: #ffcc00;
+        }
+
+        .trend-card p {
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+           .iframe-container {
+            width: 95%;
+            margin: 30px auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .iframe-01 {
+            flex: 1;
+            min-width: 400px;
+            height: 600px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            position: relative;
+        }
+
+        .design-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .iframe-title {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            z-index: 10;
+        }
+
+        @media (max-width: 768px) {
+            .iframe-wrapper {
+                min-width: 100%;
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+   
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="#second-card">Applications</a>
+        <a href="#future">Examples</a>
+    </nav>
+
+    <section>
+        <div class="top">
+           
+        </div>
+    </section>
+
+    <section class="intro">
+        <h2>What is Generative AI?</h2>
+        <p>Generative AI refers to a class of artificial intelligence systems capable of creating new content—whether text, images, music, code, or other media—by learning patterns from existing data. These systems, powered by advanced machine learning models like GPT, DALL-E, and Stable Diffusion, are revolutionizing how we approach creativity and problem-solving across industries.</p>
+        <p>Unlike traditional AI that analyzes or classifies data, generative AI produces novel outputs that often resemble human-created content. This technology builds on breakthroughs in deep learning, particularly transformer architectures and diffusion models, enabling machines to understand and generate complex, nuanced content with increasing sophistication.</p>
+    </section>
+
+    <section>
+        <div id="second-card">
+            <h2>Revolutionizing Creativity and Productivity</h2>
+            <p>Generative AI is transforming industries by enabling machines to create original content, from text and images to music and code. This technology leverages deep learning models to generate novel outputs that mimic human creativity, opening up unprecedented possibilities for innovation and efficiency across all sectors. With recent advancements, generative AI can now produce highly sophisticated outputs that are increasingly indistinguishable from human-created content.</p>
+        </div>
+    </section>
+
+    <hr style="width:95%; margin: auto; height: 2px; color: #6e48aa; ">
+
+    <section>
+        <div id="home-box">
+            <h3>Generative AI Applications</h3>
+        </div>
+        <div id="mainbox">
+            <div class="box">
+                <div class="box-image" style="background-image: url('https://images.unsplash.com/photo-1639762681057-408e52192e55?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1332&q=80');"></div>
+                <h2>Digital Art & Design</h2>
+                <p>AI tools like DALL-E, Midjourney, and Stable Diffusion enable artists to create stunning visuals from text prompts. Designers use these for rapid prototyping, mood boards, and exploring creative concepts quickly. The technology serves as a creative partner, helping professionals and amateurs alike generate novel artistic styles and compositions that push the boundaries of traditional art forms.</p>
+            </div>
+            <div class="box">
+                <div class="box-image" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');"></div>
+                <h2>Content Creation</h2>
+                <p>Generative AI produces website content, product descriptions, and marketing copy at scale. It can maintain brand voice while generating personalized content for different audiences. Journalists use AI for research assistance and draft generation, while social media managers leverage it for post creation and campaign ideation. Advanced models can now generate long-form articles with coherent structure and style.</p>
+            </div>
+            <div class="box">
+                <div class="box-image" style="background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');"></div>
+                <h2>Business Automation</h2>
+                <p>AI generates reports, presentations, and business communications automatically. It analyzes data trends to produce executive summaries in natural language. Customer service benefits from AI-generated responses that feel human-like, while marketing teams create personalized content at scale for different customer segments. AI can also draft legal documents and contracts with high accuracy.</p>
+            </div>
+            <div class="box">
+                <div class="box-image" style="background-image: url('https://images.unsplash.com/photo-1553729459-efe14ef6055d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');"></div>
+                <h2>Financial Modeling</h2>
+                <p>In finance, AI creates synthetic market scenarios for stress testing and risk prediction. It generates multiple forecast models based on different economic assumptions. Fraud detection systems use generative models to create examples of fraudulent transactions, improving their ability to recognize new fraud patterns. AI also powers algorithmic trading strategies by simulating market conditions.</p>
+            </div>
+            <div class="box">
+                <div class="box-image" style="background-image: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');"></div>
+                <h2>Personalized Learning</h2>
+                <p>AI generates customized learning materials tailored to individual students' needs and progress. It creates practice problems, explanations, and study guides on demand. Language learning apps use AI to generate natural conversations, while educators benefit from automatically generated lesson plans and assessments. AI tutors can adapt explanations based on student comprehension levels.</p>
+            </div>
+            <div class="box">
+                <div class="box-image" style="background-image: url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');"></div>
+                <h2>Drug Discovery</h2>
+                <p>In healthcare, AI designs novel molecular structures for potential new drugs. It predicts how molecules might behave in biological systems. The technology generates synthetic patient data for clinical trial simulations while preserving privacy, and helps create personalized treatment plans based on individual characteristics. AI can also suggest drug combinations for complex conditions.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="info">
+        <h2>Key Aspects of Generative AI</h2>
+        <div class="info-box">
+            <div class="info-card">
+                <h3>How It Works</h3>
+                <p>Generative AI uses neural networks to identify patterns in existing data, then creates new content with similar characteristics. Models like GPT and DALL-E are trained on massive datasets to learn the underlying structure of language or images, enabling them to generate coherent, contextually relevant outputs.</p>
+            </div>
+            <div class="info-card">
+                <h3>Major Models</h3>
+                <p>The field is dominated by transformer-based models (GPT, BERT), diffusion models (Stable Diffusion), and GANs (Generative Adversarial Networks). Each has strengths for different applications, from text generation to image synthesis and beyond.</p>
+            </div>
+            <div class="info-card">
+                <h3>Training Process</h3>
+                <p>Training involves feeding massive datasets to neural networks, adjusting millions of parameters through backpropagation. The process requires significant computational power, often using specialized GPUs or TPUs for weeks or months.</p>
+            </div>
+            <div class="info-card">
+                <h3>Fine-Tuning</h3>
+                <p>Pre-trained models can be adapted to specific tasks with additional training on domain-specific data. This transfer learning approach makes powerful AI accessible without requiring massive computational resources.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="future" class="future-trends">
+        <h2>Future Trends in Generative AI</h2>
+        <div class="trends-container">
+            <div class="trend-card">
+                <h3>Multimodal Models</h3>
+                <p>Future AI systems will seamlessly combine text, images, audio, and video generation capabilities, enabling more natural and comprehensive creative tools that can work across multiple media types simultaneously.</p>
+            </div>
+            
+            <div class="trend-card">
+                <h3>Personalized AI</h3>
+                <p>Generative models will become increasingly personalized, learning individual users' styles, preferences, and working methods to serve as true creative partners tailored to each person's unique needs.</p>
+            </div>
+            
+            <div class="trend-card">
+                <h3>Real-time Generation</h3>
+                <p>Advancements in hardware and algorithms will enable instantaneous generation of high-quality content, opening up new possibilities for live applications and interactive experiences.</p>
+            </div>
+            
+            <div class="trend-card">
+                <h3>AI-Human Collaboration</h3>
+                <p>The future will see more sophisticated interfaces that facilitate natural collaboration between humans and AI, with systems that can understand creative intent and provide context-aware suggestions.</p>
+            </div>
+        </div>
+    </section>
+
+      <div id="home-box">
+            <h3>Generative AI Example Websites</h3>
+        </div>
+
+    <div class="iframe-container">
+        <div class="iframe-01">
+            <div class="iframe-title">OpenAI DALL-E 3</div>
+            <iframe class="design-iframe" src="https://openai.com/index/dall-e-3/" title="OpenAI DALL-E 3 Image Generator"></iframe>
+        </div>
+        <div class="iframe-01">
+            <div class="iframe-title">Microsoft Designer</div>
+            <iframe class="design-iframe" src="https://designer.microsoft.com/" title="Microsoft Designer"></iframe>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>About Generative AI</h3>
+                <p>Exploring the transformative potential of artificial intelligence in creative and productive applications across industries.</p>
+                <div class="icons">
+                    <a href="#"><i class="twitter"></i></a>
+                    <a href="#"><i class="linkedin"></i></a>
+                    <a href="#"><i class="github"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <a href="">Home</a>
+                <a href="">About AI</a>
+                <a href="">Use Cases</a>
+                <a href="">Trends</a>
+            </div>
+            <div class="footer-column">
+                <h3>Resources</h3>
+                <a href="#">Research Papers</a>
+                <a href="#">Tutorials</a>
+                <a href="#">Documentation</a>
+                <a href="#">Case Studies</a>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <p>kunwarharsh61@gmail.com</p>
+                <p>+91 730372xxxx</p>
+                <p>326 Loni, Ghaziabad</p>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Generative. All rights reserved.</p>
+                <p>Created by Harsh Kunwar | Last updated: May 2024</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
